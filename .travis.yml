@@ -1,0 +1,33 @@
+language: dart
+
+sudo: required
+addons:
+  chrome: stable
+
+# before_install:
+#  - nvm install node
+#  - node --version
+
+script: ./simple_support/root_travis.sh
+
+jobs:
+  include:
+    - stage: min
+      dart: 2.7.0
+    - stage: stable
+      dart: stable
+    - stage: dev
+      dart: dev
+
+stages:
+  - stable
+  - min
+  - dev
+
+cache:
+  directories:
+    - $HOME/.pub-cache
+
+matrix:
+  allow_failures:
+    - dart: dev
